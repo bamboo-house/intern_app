@@ -2,8 +2,8 @@
 
   <%# event_titleでまとめて表示 %>
   <%@data.each do |d|%>
-    <p><%= d.group_name%></p>
-    <%=link_to d.event_title, d.link_url%>
+    <p class="group_name"><%= d.group_name%></p>
+    <%=link_to d.event_title, d.link_url, class: "info_event"%>
   <%end%>
 
   <%# 団体名でまとめて表示 %>

@@ -55,7 +55,7 @@ class Scraping < ApplicationRecord
     count = RegGroup.count
     for n in 1..count
       current_data = RegGroup.find(n)
-      update = Scraping.where(group_name: current_data.group_name)
+      update = self.where(group_name: current_data.group_name)
       update.update_all(reg_group_id: current_data.id) unless update.update_all(reg_group_id: current_data.id).present?
     end
   end
