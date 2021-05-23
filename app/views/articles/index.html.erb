@@ -1,11 +1,17 @@
 <div class="main">
+
+  <%# event_titleでまとめて表示 %>
   <%@data.each do |d|%>
-    <p><%#= d.group_name%></p>
-    <%#=link_to d.event_title, d.link_url%>
-  <%end%>
-  <%@reg.scrapings.each do |d|%>
     <p><%= d.group_name%></p>
     <%=link_to d.event_title, d.link_url%>
+  <%end%>
+
+  <%# 団体名でまとめて表示 %>
+  <%@reg.each do |d|%>
+    <p><%= d.group_name%></p>
+    <%d.scrapings.each do |a|%>
+      <%=link_to a.event_title, a.link_url%>
+    <%end%>
   <%end%>
   
   

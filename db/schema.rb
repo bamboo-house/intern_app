@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210522181052) do
+ActiveRecord::Schema.define(version: 20210523060253) do
 
   create_table "reg_groups", force: :cascade do |t|
     t.string "group_name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20210522181052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reg_group_id"
+    t.index ["reg_group_id"], name: "index_scrapings_on_reg_group_id"
   end
 
 end
