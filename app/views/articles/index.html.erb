@@ -1,11 +1,12 @@
-<div class="center jumbotron">
-  <h1>Welcome to the Volunteer App</h1>
-
-  <h2>
-    This is the home page for the
-    <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
-
-
+<div class="main">
+  <%@data.each do |d|%>
+    <p><%#= d.group_name%></p>
+    <%#=link_to d.event_title, d.link_url%>
+  <%end%>
+  <%@reg.scrapings.each do |d|%>
+    <p><%= d.group_name%></p>
+    <%=link_to d.event_title, d.link_url%>
+  <%end%>
+  
+  
 </div>
