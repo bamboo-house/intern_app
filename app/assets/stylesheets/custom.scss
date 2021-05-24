@@ -1,6 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+// パーシャル
+@import 'index';
+
+.main {
+  padding: 60px 60px;
+}
+
+/* main */
+
+
 /* universal */
 
 body {
@@ -22,6 +32,7 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
 
 /* typography */
 
