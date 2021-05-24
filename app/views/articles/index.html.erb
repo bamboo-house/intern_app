@@ -1,18 +1,26 @@
 <div class="main">
 
   <%# event_titleでまとめて表示 %>
-  <%@data.each do |d|%>
-    <p class="group_name"><%= d.group_name%></p>
-    <%=link_to d.event_title, d.link_url, class: "info_event"%>
-  <%end%>
+  <ul>
+    <%@datas.each do |d|%>
+      <li>
+        <p class="group_name"><%= d.group_name%></p>
+        <%=link_to d.event_title, d.link_url, class: "info_event"%>
+      </li>
+    <%end%>
+  </ul>
+
+  <%= paginate @datas%>
 
   <%# 団体名でまとめて表示 %>
-  <%@reg.each do |d|%>
-    <p><%= d.group_name%></p>
-    <%d.scrapings.each do |a|%>
-      <%=link_to a.event_title, a.link_url%>
+  <%if false %>
+    <%@reg.each do |d|%>
+      <p><%= d.group_name%></p>
+      <%d.scrapings.each do |a|%>
+        <%=link_to a.event_title, a.link_url%>
+      <%end%>
     <%end%>
-  <%end%>
+  <%end %>
   
   
 </div>

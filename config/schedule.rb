@@ -11,6 +11,6 @@ set :output, "#{Rails.root}/log/cron.log"
 set :environment, :development
 
 #毎日7:00にスクレイピングを実行する
-every 1.minutes do
+every 1.day, :at => '7:00' do
   rake 'auto_scraping:auto_scraping_task'
 end

@@ -12,6 +12,7 @@ gem 'jbuilder',     '2.7.0'
 gem 'mechanize',     '2.8.1'
 gem 'selenium-webdriver',  '3.142.7'
 gem 'whenever',      '1.0.0'
+gem 'kaminari'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3.6'
