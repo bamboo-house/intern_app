@@ -7,23 +7,15 @@ class Scraping < ApplicationRecord
   def self.scrape_blueship
     agent = Mechanize.new
     for i in 0..10 #ページネーションに対応させている
-
       #スクレイピング(blueship)Mechanizeを用いる
       current_page = agent.get("https://blueshipjapan.com/search/event/catalog?area=0&text_date=&date=1&text_keyword=&cancelled=0&cancelled=1&order=desc&per page=#{18*i}")
+
       #欲しいタグ情報を取り出す
       event_titles = current_page.search("h2.event_title a")
       group_names = current_page.search(".crew_info p") 
 
       #スクレイピングした情報をデータベースに入れる  
-      event_titles.zip(group_names, event_titles) do |title, name, link|
-        unless self.find_by(event_title: title.text) #レコードの重複を阻止
-          data = self.new
-          data.group_name = name.inner_text
-          data.event_title = title.inner_text
-          data.link_url = link.get_attribute('href')
-          data.save
-        end
-      end
+      Scraping.data_save(event_titles, group_names, event_titles)
     end
   end
 
@@ -38,24 +30,17 @@ class Scraping < ApplicationRecord
     group_names = driver.find_elements(:xpath, '//*[@id="event_search"]/div/div/section/div/div/div/dl/dd/div/h4/a')
 
     #スクレイピングした情報をデータベースに入れる
-    event_titles.zip(group_names, event_titles) do |title, name, link|
-      unless self.find_by(event_title: title.text) #レコードの重複を阻止
-        data = self.new 
-        data.group_name = name.text
-        data.event_title = title.text
-        data.link_url = link.attribute('href')
-        data.save
-      end
-    end
+    Scraping.data_save(event_titles, group_names, event_titles)
     driver.quit
   end
   
-  #scrapingsテーブルのreg_group_idをreg_groupsテーブルに基づいて更新する
+  #reg_group_idをreg_groupsテーブルに基づいて紐付けする
   def self.update_reg_group_id
     count = RegGroup.count
     for n in 1..count
       current_data = RegGroup.find(n)
       update = self.where(group_name: current_data.group_name)
+      #新しく団体を登録したときでも紐付けされるようにする
       update.update_all(reg_group_id: current_data.id) unless update.update_all(reg_group_id: current_data.id).present?
     end
   end

@@ -8,15 +8,5 @@
       </li>
     <%end%>
   </ul>
-  <%= paginate @datas%>
-
-  <%# 団体名でまとめて表示 %>
-  <%if false %>
-    <%@reg.each do |d|%>
-      <p><%= d.group_name%></p>
-      <%d.scrapings.each do |a|%>
-        <%=link_to a.event_title, a.link_url%>
-      <%end%>
-    <%end%>
-  <%end %>  
+  <%= paginate @datas%> 
 </div>
