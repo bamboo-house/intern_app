@@ -9,7 +9,6 @@ feature "Articles", type: :feature do
 
   #indexビューにデータが表示されていれば有効
   scenario 'check the index view' do
-    @data = Scraping.where.not(reg_group_id: nil)
     visit root_path
     expect(page).to have_selector 'p.group-name', text: 'bamboo'
     expect(page).to have_link 'eat takenoko'
